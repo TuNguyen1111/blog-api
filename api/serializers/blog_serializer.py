@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from rest_framework.reverse import reverse
 
 from ..models import Blog
 
@@ -15,4 +16,6 @@ class BlogSerializer(serializers.ModelSerializer):
         ]
 
     def get_image_url(self, obj):
-        return obj.image.url
+        request = self.context.get('request')
+        image_url = obj.image.url
+        return request.build_absolute_uri(image_url)

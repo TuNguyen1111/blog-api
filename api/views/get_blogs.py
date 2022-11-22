@@ -7,5 +7,8 @@ from ..serializers import BlogSerializer
 @api_view(['GET'])
 def get_blogs(request):
     blogs = Blog.get_all_blogs()
-    serializer = BlogSerializer(blogs, many=True).data
+    context = {
+        'request': request
+    }
+    serializer = BlogSerializer(blogs, context=context, many=True).data
     return Response(serializer)
