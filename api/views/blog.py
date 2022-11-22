@@ -24,3 +24,11 @@ def create_blog(request):
     if serializer.is_valid(raise_exception=True):
         serializer.save()
     return Response(serializer.data)
+
+
+@api_view(['POST'])
+def delete_blog(request, id):
+    blog = Blog.get_blog_by_id(id)
+    if blog:
+        blog.delete()
+    return Response('Delete success!')

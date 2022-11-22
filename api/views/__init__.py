@@ -1,1 +1,1 @@
-from .blog import get_blogs, create_blog
+from .blog import get_blogs, create_blog, delete_blog

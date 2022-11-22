@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.exceptions import ObjectDoesNotExist
 
 
 class Blog(models.Model):
@@ -18,3 +19,10 @@ class Blog(models.Model):
     @classmethod
     def get_blog_by_user(cls, user):
         return cls.objects.filter(user=user)
+
+    @classmethod
+    def get_blog_by_id(cls, blog_id):
+        try:
+            return cls.objects.get(id=blog_id)
+        except ObjectDoesNotExist:
+            return None
