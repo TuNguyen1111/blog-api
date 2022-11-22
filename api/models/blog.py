@@ -6,7 +6,7 @@ from django.core.exceptions import ObjectDoesNotExist
 class Blog(models.Model):
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     title = models.CharField(max_length=100, null=False, blank=False)
-    description = models.TextField(null=True, blank=True)
+    content = models.TextField(null=True, blank=True)
     image = models.ImageField(null=True, blank=True, default='/iniesta.jpg')
 
     def __str__(self):
