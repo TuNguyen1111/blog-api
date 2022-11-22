@@ -19,3 +19,6 @@ class BlogSerializer(serializers.ModelSerializer):
         request = self.context.get('request')
         image_url = obj.image.url
         return request.build_absolute_uri(image_url)
+
+    def create(self, validated_data):
+        return super().create(validated_data)
