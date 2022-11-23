@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    render_blogs()
+    render_blogs();
 
 })
 
@@ -19,10 +19,19 @@ function render_blogs() {
                         <h2><a class="article-title" href="">${blog.title}</a></h2>
                         <p class="article-content">${blog.content ? blog.content: ''}</p>
                         <img class="blog-img" src="${blog.image_url}">
+                        <div>
+                            <button onClick=go_to_detail_page(${blog.blog_id}) type="button" class="btn btn-primary go_to_detail" blog_id=${blog.blog_id}>Detail</button>
+                        </div>
                     </div>
                 </article>
             `
             $('#main').append(html)
         }
     });
+}
+
+
+function go_to_detail_page(blog_id) {
+    let target_url = HOST_URL + `/detail-blog/${blog_id}`
+    location.replace(target_url);
 }
