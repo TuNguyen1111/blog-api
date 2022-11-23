@@ -17,7 +17,7 @@ function render_blogs() {
                             <small class="text-muted">2022-01-01</small>
                         </div>
                         <h2><a class="article-title" href="">${blog.title}</a></h2>
-                        <p class="article-content">${blog.content}</p>
+                        <p class="article-content">${blog.content ? blog.content: ''}</p>
                         <img class="blog-img" src="${blog.image_url}">
                     </div>
                 </article>
