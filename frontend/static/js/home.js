@@ -11,7 +11,6 @@ function render_blogs() {
         for (let blog of blogs) {
             let html = `
                 <article class="media content-section">
-                    <img class="rounded-circle article-img" src="">
                     <div class="media-body">
                         <div class="article-metadata">
                             <a class="mr-2" href="">Tu Nguyen</a>
