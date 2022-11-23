@@ -10,4 +10,7 @@ def create_blog(request):
 
 
 def detail_blog(request, pk):
-    return render(request, 'detail_blog.html')
+    context = {
+        'blog_id': pk,
+    }
+    return render(request, 'detail_blog.html', context)
