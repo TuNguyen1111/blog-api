@@ -1,0 +1,1 @@
+const HOST_URL = [location.protocol, '//', location.host].join('');
