@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block content %}
-    <form>
+    <form id="login_form">
         <div class="form-group">
             <label for="username">Username</label>
             <input type="text" class="form-control" id="username" placeholder="Enter username">
@@ -15,7 +15,7 @@
             <input type="password" class="form-control" id="password" placeholder="Password">
         </div>
         <div class="form-group text-center">
-            <button type="submit" class="btn btn-primary">Login</button>
+            <button id="login_btn" type="button" class="btn btn-primary">Login</button>
         </div>
     </form>
 {% endblock %}
