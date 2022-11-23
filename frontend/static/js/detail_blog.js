@@ -1,7 +1,6 @@
 $(document).ready(function() {
     fill_data_to_form();
     bind_event_for_update_btn();
-    bind_event_for_delete_btn();
 })
 
 
@@ -49,15 +48,13 @@ function bind_event_for_update_btn() {
 }
 
 
-function bind_event_for_delete_btn() {
-    $('#delete_btn').click(function() {
-        let blog_id = $('#blog_id').val();
-        let endpoint = `delete/${blog_id}`;
-        let method = 'POST';
+function bind_event_for_delete_action() {
+    let blog_id = $('#blog_id').val();
+    let endpoint = `delete/${blog_id}`;
+    let method = 'POST';
 
-        call_api(endpoint, method).done(function(res) {
-            alert('Delete success!');
-            location.replace(HOST_URL);
-        })
+    call_api(endpoint, method).done(function(res) {
+        alert('Delete success!');
+        location.replace(HOST_URL);
     })
 }
