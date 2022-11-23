@@ -5,9 +5,9 @@ $(document).ready(function() {
 
 
 function render_blogs() {
-    $.ajax({
-        url: "http://127.0.0.1:8000/api/blogs",
-    }).done(function(blogs) {
+    let endpoint = 'blogs';
+    let method = 'GET';
+    call_api(endpoint, method).done(function(blogs) {
         for (let blog of blogs) {
             let html = `
                 <article class="media content-section">
