@@ -1,7 +1,9 @@
 {% extends "base.html" %}
+{% load static %}
 {% load crispy_forms_tags %}
 {% block content %}
-    <form method='POST'>
+    <form id='create_form' method='POST'>
+        {% csrf_token %}
         <div class="mb-3">
             <label for="title" class="form-label">Title</label>
             <input type="text" class="form-control" id="title" name="title">
@@ -10,6 +12,10 @@
             <label for="content" class="form-label">Content</label>
             <textarea id="content" name="content" class="form-control"></textarea>
         </div>
-        <button type="button" class="btn btn-primary">Create</button>
+        <button id='create_btn' type="button" class="btn btn-primary">Create</button>
     </form>
 {% endblock content %}
+
+{% block js %}
+    <script src="{% static 'js/create_blog.js' %}"></script>
+{% endblock %}
