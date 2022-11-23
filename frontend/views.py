@@ -14,3 +14,7 @@ def detail_blog(request, pk):
         'blog_id': pk,
     }
     return render(request, 'detail_blog.html', context)
+
+
+def login_view(request):
+    return render(request, 'login.html')
