@@ -7,3 +7,7 @@ def home(request):
 
 def create_blog(request):
     return render(request, 'create_blog.html')
+
+
+def detail_blog(request, pk):
+    return render(request, 'detail_blog.html')

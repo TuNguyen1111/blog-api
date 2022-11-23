@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <form id='create_form' method='POST'>
+        <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" class="form-control" id="title" name="title">
+        </div>
+        <div class="mb-3">
+            <label for="content" class="form-label">Content</label>
+            <textarea id="content" name="content" class="form-control"></textarea>
+        </div>
+        <button id='create_btn' type="button" class="btn btn-primary">Update</button>
+        <button id='delete_btn' type="button" class="btn btn-primary">Delete</button>
+    </form>
+{% endblock content %}
+
+{% block js %}
+    {% comment %} <script src="{% static 'js/create_blog.js' %}"></script> {% endcomment %}
+{% endblock %}
