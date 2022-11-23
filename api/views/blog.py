@@ -14,6 +14,29 @@ def get_blogs(request):
     return Response(serializer)
 
 
+@api_view(['GET'])
+def get_blog(request, id):
+    blog = Blog.get_blog_by_id(id)
+    context = {
+        'request': request
+    }
+    serializer = BlogSerializer(blog, context=context, many=False).data
+    return Response(serializer)
+
+
+@api_view(['POST'])
+def update_blog(request, id):
+    blog = Blog.get_blog_by_id(id)
+    context = {
+        'request': request,
+    }
+    serializer = BlogSerializer(instance=blog, data=request.data, context=context)
+    if serializer.is_valid():
+        serializer.save()
+        return Response('Update success!')
+    return Response('Update failed!')
+
+
 @api_view(['POST'])
 def create_blog(request):
     data = request.data
