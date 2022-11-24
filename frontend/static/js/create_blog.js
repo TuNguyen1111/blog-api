@@ -4,7 +4,7 @@ $(document).ready(function() {
 
 
 function create_blog() {
-    let endpoint = 'create/';
+    let endpoint = 'create';
     let method = 'POST';
     let form_data = {};
     for (let input of $('#create_form').find('input, textarea')) {
@@ -12,7 +12,10 @@ function create_blog() {
         let input_val = $(input).val();
         form_data[input_name] = input_val;
     }
-    call_api(endpoint, method, form_data).done(function(res) {
-        $('#create_form')[0].reset();
-    })
+    call_api(endpoint, method, form_data, reset_form);
+}
+
+
+function reset_form() {
+    $('#create_form')[0].reset();
 }
