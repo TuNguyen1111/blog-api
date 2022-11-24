@@ -1,6 +1,6 @@
-async function call_api(endpoint, method, handle_success_response, form_data) {
+async function call_api(endpoint, method, form_data) {
     let access_token = localStorage.getItem('access');
-    let url = `http://127.0.0.1:8000/api/${endpoint}/`;
+    let url = `${HOST_URL}/api/${endpoint}/`;
     let options = {
         method: method,
         headers: {
@@ -14,11 +14,10 @@ async function call_api(endpoint, method, handle_success_response, form_data) {
     }
 
     let response = await fetch(url, options);
-    if (response.status == 200) {
-        let data = await response.json()
-        handle_success_response(data);
-    }
-    else {
-        alert(response.statusText);
-    }
+    return response
+}
+
+
+function show_response_error(response) {
+    $('#api_error').text(response.statusText);
 }

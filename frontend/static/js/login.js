@@ -3,14 +3,28 @@ $(document).ready(function() {
 })
 
 
-function login() {
-    let endpoint = 'token';
-    let method = 'POST';
+async function login() {
     let user_data = {};
     user_data['username'] = $('#username').val();
     user_data['password'] = $('#password').val();
 
-    call_api(endpoint, method, save_token, user_data);
+    let url = `${HOST_URL}/api/token/`;
+    let options = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: user_data ? JSON.stringify(user_data) : ''
+    }
+
+    let response = await fetch(url, options);
+    if (response.status == 200) {
+        let data = await response.json()
+        save_token(data);
+    }
+    else {
+        alert(response.statusText);
+    }
 }
 
 
@@ -30,3 +44,4 @@ function parse_Jwt(token) {
 
     return JSON.parse(jsonPayload);
 }
+

@@ -3,7 +3,7 @@ $(document).ready(function() {
 })
 
 
-function create_blog() {
+async function create_blog() {
     let endpoint = 'create';
     let method = 'POST';
     let form_data = {};
@@ -12,10 +12,8 @@ function create_blog() {
         let input_val = $(input).val();
         form_data[input_name] = input_val;
     }
-    call_api(endpoint, method, form_data, reset_form);
-}
-
-
-function reset_form() {
-    $('#create_form')[0].reset();
+    let response = await call_api(endpoint, method, form_data);
+    if (is_success_status(response)) {
+        $('#create_form')[0].reset();
+    }
 }

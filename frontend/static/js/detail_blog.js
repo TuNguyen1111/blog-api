@@ -1,19 +1,25 @@
 $(document).ready(function() {
     get_blog();
-    bind_event_for_update_btn();
+
+    $('#update_btn').click(update_blog);
+    $('#confirm_delete_btn').click(delete_blog);
 })
 
 
-function get_blog() {
+async function get_blog() {
     let blog_id = $('#blog_id').val();
     let endpoint = `get-blog/${blog_id}`;
     let method = 'GET';
 
-    call_api(endpoint, method, fill_data_to_form);
+    let response = await call_api(endpoint, method);
+    if (is_success_status(response)) {
+        let blog_data = await response.json();
+        fill_blog_data_to_form(blog_data);
+    }
 }
 
 
-function fill_data_to_form(response) {
+function fill_blog_data_to_form(blog_data) {
     for (let ele of $('#update_form').find('input, textarea, img')) {
         let input_name = $(ele).attr('name');
 
@@ -22,44 +28,43 @@ function fill_data_to_form(response) {
         }
 
         if (input_name === 'blog_img') {
-            let img_src = response['image_url'];
+            let img_src = blog_data['image_url'];
             $('#blog_img').attr('src', img_src);
         }
-        else if (input_name in response) {
-            $(ele).val(response[input_name]);
+        else if (input_name in blog_data) {
+            $(ele).val(blog_data[input_name]);
         }
     }
 }
 
 
 
-function bind_event_for_update_btn() {
-    $('#update_btn').click(function() {
-        let blog_id = $('#blog_id').val();
-        let endpoint = `update/${blog_id}`;
-        let method = 'POST';
-        let blog_data = {};
-        for (let input of $('#update_form').find('input, textarea')) {
-            let input_name = $(input).attr('name');
-            let input_val = $(input).val();
-            blog_data[input_name] = input_val;
-        }
-        call_api(endpoint, method, show_update_result, blog_data);
-    })
+async function update_blog() {
+    let blog_id = $('#blog_id').val();
+    let endpoint = `update/${blog_id}`;
+    let method = 'POST';
+    let blog_data = {};
+    for (let input of $('#update_form').find('input, textarea')) {
+        let input_name = $(input).attr('name');
+        let input_val = $(input).val();
+        blog_data[input_name] = input_val;
+    }
+    let response = await call_api(endpoint, method, blog_data);
+    if (is_success_status(response)) {
+        alert('Updated!');
+    }
 }
 
 
-function show_update_result(response) {
-    alert(response);
-}
-
-
-function bind_event_for_delete_action() {
+async function delete_blog() {
     let blog_id = $('#blog_id').val();
     let endpoint = `delete/${blog_id}`;
     let method = 'POST';
 
-    call_api(endpoint, method, go_to_home_page);
+    let response = await call_api(endpoint, method);
+    if (is_success_status(response)) {
+        go_to_home_page();
+    }
 }
 
 
