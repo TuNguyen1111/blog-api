@@ -1,9 +1,11 @@
 async function call_api(endpoint, method, handle_success_response, form_data) {
+    let access_token = localStorage.getItem('access');
     let url = `http://127.0.0.1:8000/api/${endpoint}/`;
     let options = {
         method: method,
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization':'Bearer ' + String(access_token)
         },
     }
 
@@ -15,6 +17,8 @@ async function call_api(endpoint, method, handle_success_response, form_data) {
     if (response.status == 200) {
         let data = await response.json()
         handle_success_response(data);
-
+    }
+    else {
+        alert(response.statusText);
     }
 }
