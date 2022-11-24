@@ -1,10 +1,12 @@
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 
 from ..models import Blog
 from ..serializers import BlogSerializer
+from ..permissions import CanViewBlogs, CanCreateBlog
 
 @api_view(['GET'])
+@permission_classes([CanViewBlogs])
 def get_blogs(request):
     blogs = Blog.get_all_blogs()
     context = {
@@ -38,6 +40,7 @@ def update_blog(request, id):
 
 
 @api_view(['POST'])
+@permission_classes([CanCreateBlog])
 def create_blog(request):
     data = request.data
     context = {
