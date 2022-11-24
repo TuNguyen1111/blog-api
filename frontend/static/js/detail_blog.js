@@ -12,10 +12,7 @@ async function get_blog() {
     let method = 'GET';
 
     let response = await call_api(endpoint, method);
-    if (is_success_status(response)) {
-        let blog_data = await response.json();
-        fill_blog_data_to_form(blog_data);
-    }
+    handle_response(response, fill_blog_data_to_form);
 }
 
 
@@ -50,9 +47,12 @@ async function update_blog() {
         blog_data[input_name] = input_val;
     }
     let response = await call_api(endpoint, method, blog_data);
-    if (is_success_status(response)) {
-        alert('Updated!');
-    }
+    handle_response(response, show_update_success_msg);
+}
+
+
+function show_update_success_msg(){
+    alert('Updated!');
 }
 
 
@@ -62,9 +62,7 @@ async function delete_blog() {
     let method = 'POST';
 
     let response = await call_api(endpoint, method);
-    if (is_success_status(response)) {
-        go_to_home_page();
-    }
+    handle_response(response, go_to_home_page);
 }
 
 

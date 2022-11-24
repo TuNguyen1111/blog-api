@@ -21,17 +21,11 @@ async function login() {
     if (response.status == 200) {
         let data = await response.json()
         save_token(data);
+        location.reload();
     }
     else {
         alert(response.statusText);
     }
-}
-
-
-function save_token(response) {
-    localStorage.setItem('refresh', response.refresh);
-    localStorage.setItem('access', response.access);
-    console.log(parse_Jwt(response.access))
 }
 
 

@@ -18,6 +18,28 @@ async function call_api(endpoint, method, form_data) {
 }
 
 
-function show_response_error(response) {
-    $('#api_error').text(response.statusText);
+function get_access_token_by_refresh_token() {
+    let refresh_token = localStorage.getItem('refresh');
+    if (!refresh_token) {
+        return;
+    }
+
+    let url = `${HOST_URL}/api/token/refresh/`;
+    let body_data = {
+        'refresh': refresh_token
+    }
+    let options = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(body_data)
+    }
+
+    fetch(url, options)
+    .then(res => res.json())
+    .then(data => {
+        save_new_access_token(data);
+        location.reload();
+    })   
 }

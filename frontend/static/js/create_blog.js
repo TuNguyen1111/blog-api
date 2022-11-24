@@ -13,7 +13,10 @@ async function create_blog() {
         form_data[input_name] = input_val;
     }
     let response = await call_api(endpoint, method, form_data);
-    if (is_success_status(response)) {
-        $('#create_form')[0].reset();
-    }
+    handle_response(response, reset_form);
+}
+
+
+function reset_form() {
+    $('#create_form')[0].reset();
 }
