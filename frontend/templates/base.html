@@ -43,6 +43,7 @@
       </nav>
     </header>
     <main role="main" class="container">
+      <h1 id="api_error"></h1>
       <div class="row">
         <div class="col-md-8">
           {% if messages %}
@@ -77,6 +78,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="{% static 'js/common/api.js' %}"></script>
     <script src="{% static 'js/common/const.js' %}"></script>
+    <script src="{% static 'js/utils/api_utils.js' %}"></script>
     {% block js %}
     {% endblock %}
 </body>
